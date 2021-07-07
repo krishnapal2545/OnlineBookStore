@@ -2,7 +2,7 @@ from typing import List
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from .models import *
-import string , random
+import string , random , math
 from .lists import *
 
 def home(request):
@@ -68,6 +68,7 @@ def addbook(request):
 
 def booklist(request):
     login=False
+    post=6
     author = {'All'}
     genre = {'All'}
     lang = {'All'}
@@ -97,8 +98,24 @@ def booklist(request):
         books = bookids + bookauts + bookgens + booklans
         if boo == 'All' and gen == 'All' and lan == 'All' and aut == 'All' :
             books = Book.objects.all()
-            
+    last = math.ceil( len(books)/post)
+    page = request.GET.get('page')
+    if (not str(page).isnumeric()):
+        page = 1
+    page = int(page)
+    books= books[(page-1) * post : (page-1) * post + post ]
+    if page == 1:
+        prev = "#"
+        old = "/books/?page="+ str(page+1)
+    elif page == last :
+        prev = "/books/?page="+ str(page-1)
+        old = "#"
+    else:
+        prev = "/books/?page="+ str(page-1)
+        old = "/books/?page="+ str(page+1)     
     param={'login':login,'Books':books,'Authors':author,
     'Genres':genre,'Languages':lang,'Bookids':bookid,
-    'boo':boo,'gen':gen,'lan':lan,'aut':aut}
+    'boo':boo,'gen':gen,'lan':lan,'aut':aut,
+    'prev':prev,'old':old,'num':page,'last':last
+    }
     return render(request,'booklist.html',param)

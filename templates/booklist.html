@@ -68,7 +68,7 @@
     {% block content %} 
     <main>
       <h2 class="display-6 text-center mb-4"style="font-family: 'Times New Roman', Times, serif;font-size:40px;">Avaliable Books</h2>
-      <div >
+      <div class="px-5">
       <form method="POST" style="font-family: 'Times New Roman', Times, serif;font-size:20px;"> {% csrf_token %}
         <button type="button" class="btn btn-primary btn-md" onclick="goBack()">Back</button>
         Book ID:&nbsp;&nbsp;&nbsp; <select id="sel" name="bookid"><option >{{boo}}</option>{% for bookid in Bookids %}<option >{{bookid}}</option>{% endfor %}</select>
@@ -100,6 +100,14 @@
               <h5 class="display-6 text-center mb-4"style="font-family: 'Times New Roman', Times, serif;font-size:20px; margin:auto;"> No books are Present </h5>
               {% endif %}  
           </div>
+        </div>
+        <div class="clear-fix px-5" style="height: 40px;" >
+          {% if num != 1 %}
+          <a class="btn btn-primary float-left" href="{{prev}}" style="float: left;" >&larr;Previous</a>
+          {% endif %}
+          {% if num != last %}
+            <a class="btn btn-primary float-right" href="{{old}}" style="float: right;"> Next&rarr;</a>
+            {% endif %}
         </div>
     </main>
     <footer class="pt-4 pt-md-5 border-top bg-dark text-white px-md-5">
