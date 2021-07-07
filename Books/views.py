@@ -81,23 +81,6 @@ def booklist(request):
     if 'admin' in request.session:
         login=True
     books = Book.objects.all()
-    for book in books:
-        author.add(book.author)
-        genre.add(book.genre)
-        lang.add(book.language)
-        bookid.add(book.bookid)
-    if request.method == 'POST':
-        boo = request.POST['bookid']
-        gen = request.POST['genre']
-        lan = request.POST['lang']
-        aut = request.POST['auth']
-        if boo != 'All': bookids = list(Book.objects.filter(bookid=boo).all())
-        if gen != 'All': bookgens = list(Book.objects.filter(genre=gen).all())
-        if lan != 'All': booklans = list(Book.objects.filter(language=lan).all())
-        if aut != 'All': bookauts = list(Book.objects.filter(author=aut).all())
-        books = bookids + bookauts + bookgens + booklans
-        if boo == 'All' and gen == 'All' and lan == 'All' and aut == 'All' :
-            books = Book.objects.all()
     last = math.ceil( len(books)/post)
     page = request.GET.get('page')
     if (not str(page).isnumeric()):
@@ -112,10 +95,32 @@ def booklist(request):
         old = "#"
     else:
         prev = "/books/?page="+ str(page-1)
-        old = "/books/?page="+ str(page+1)     
+        old = "/books/?page="+ str(page+1) 
+    for book in books:
+        author.add(book.author)
+        genre.add(book.genre)
+        lang.add(book.language)
+        bookid.add(book.bookid)
     param={'login':login,'Books':books,'Authors':author,
     'Genres':genre,'Languages':lang,'Bookids':bookid,
     'boo':boo,'gen':gen,'lan':lan,'aut':aut,
-    'prev':prev,'old':old,'num':page,'last':last
+    'prev':prev,'old':old,'num':page,'last':last,'page':True
     }
+    if request.method == 'POST':
+        boo = request.POST['bookid']
+        gen = request.POST['genre']
+        lan = request.POST['lang']
+        aut = request.POST['auth']
+        if boo != 'All': bookids = list(Book.objects.filter(bookid=boo).all())
+        if gen != 'All': bookgens = list(Book.objects.filter(genre=gen).all())
+        if lan != 'All': booklans = list(Book.objects.filter(language=lan).all())
+        if aut != 'All': bookauts = list(Book.objects.filter(author=aut).all())
+        books = bookids + bookauts + bookgens + booklans
+        if boo == 'All' and gen == 'All' and lan == 'All' and aut == 'All' :
+            return redirect('/books')
+
+        param={'login':login,'Books':books,'Authors':author,
+        'Genres':genre,'Languages':lang,'Bookids':bookid,
+        'boo':boo,'gen':gen,'lan':lan,'aut':aut,
+        }
     return render(request,'booklist.html',param)
