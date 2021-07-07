@@ -1,0 +1,99 @@
+{% include 'homestyle.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #in {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        #b {
+            border-radius: 15px;
+            margin: auto;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: auto;
+            width: 100%;
+            resize: both;
+        }
+
+
+
+        button:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body >
+    {% block content %}
+    {% for message in messages %}
+    <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" style="text-align: center;">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="card mb-3"
+        style="max-width: 1000px; margin:auto; border-radius:20px; padding: 10px; background-color: #f2f2f2; ">
+        <div class="row g-0">
+            <form method="POST" class="needs-validation" novalidate enctype="multipart/form-data"> {% csrf_token %}
+                <div class="imgcontainer">
+                    <img src="{% static 'bookicon.png' %}" alt="Avatar" class="avatar">
+                </div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="name" class="form-label">Book Name</label>
+                        <input type="text" class="form-control"  name="name"
+                            placeholder="Enter Book Name " required>
+                    </div>
+                    <div class="col-12">
+                        <label for="photo" class="form-label"> Cover Photo</label>
+                        <input type="text" class="form-control" name="photo" placeholder="Enter the link of Book Cover Photo"
+                            required>
+                    </div>
+                    <div class="col-12">
+                        <label for="phone" class="form-label">Author Name</label>
+                        <input type="text" class="form-control" name="auth" placeholder="Enter Author Name"
+                            required>
+                    </div>
+                    <div class="col-12">
+                        <label  class="form-label">Enter Genre</label>
+                            <select class="form-select"name="genre" required>
+                                {% for genre in Genre %}
+                                <option >{{genre}}</option>
+                                {% endfor %}
+                            </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="aadhar" class="form-label">Language</label>
+                        <select class="form-select"name="lang" required>
+                            {% for lang in Lang %}
+                                <option >{{lang}}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div style="margin: auto; width:60% ; text-align:center">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 15px; width:100%;">
+                        <b>Add Book</b></button><br>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

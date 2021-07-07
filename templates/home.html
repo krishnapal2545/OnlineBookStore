@@ -1,0 +1,224 @@
+{% include 'homestyle.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+          body {
+            background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+          }
+          
+          h5{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 22px;
+          }
+          p{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+          }
+          .container {
+            max-width: 960px;
+          }
+          
+          .pricing-header {
+            max-width: 700px;
+          }
+          .card{
+            border-radius: 15px;
+            background-color: whitesmoke;
+          }
+          .card:hover{
+            border: 3px;
+            box-shadow: 0 0 80px -10px rgb(0, 0, 0);
+            opacity: 100%;
+        }
+    </style>
+</head>
+<body>
+    {% block content %} 
+    <div class="container py-2">
+      <div class="pricing-header p-1 pb-md-2 mx-auto text-center">
+        <h1 class="display-4 fw-normal"style="font-family: 'Times New Roman', Times, serif;font-size:40px;"><img src="{% static 'logo.png' %}" style="width: 100px;height:100px;" >ReadingRoots</h1>
+        <p class="fs-5 text-muted"style="font-family: 'Times New Roman', Times, serif;font-size:20px;">
+            ReadingRoots is an initiative to empower the reading 
+            community and promote sustainable reading. There are 
+            still lot of us who prefer paperbacks in this digital age, 
+            who love the smell of a book, who still get delighted at the 
+            sight of a book in someone else’s hand. We wish to bring closer 
+            such people and enhance your experience as an avid reader and also 
+            help others take on this noble habit.
+        </p>
+      </div>
+    </div>
+    <main>
+      <h2 class="display-6 text-center mb-4"style="font-family: 'Times New Roman', Times, serif;font-size:40px;">Features</h2>
+      <div class="album py-3 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'booklogo.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5>Book Catalogue</h5>
+                  <p class="card-text">
+                    Keep a complete track of the books you own, 
+                    books you shared and the books you borrowed 
+                    by creating a book catalogue</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'spend.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5>Spend Less. Read More.</h5>
+                  <p class="card-text">
+                    Read more books without having &nbsp; to purchase them 
+                    all by simply borrowing it from the readers around you </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'community.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5>Reading Community</h5>
+                  <p class="card-text">
+                    Build a community of readers that share 
+                    the likes of you by making book and 
+                    have long discussions over your favorite books</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'recycle.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5>Shared Library</h5>
+                  <p class="card-text">
+                    Create a shared library for the readers 
+                    to read that live/study/work around you and boost 
+                    your reading appetite</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'earth.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5 >Sustainable Reading</h5>
+                  <p class="card-text">
+                    Promote the habit of Sustainable Reading 
+                    through borrowing and sharing books, enjoying 
+                    the best books while saving environment</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card px-2 py-3">
+                <img src="{% static 'calender.png'%}" style="width: 100px; height:100px; margin:auto">
+                <div class="card-body">
+                    <h5>Book Return Notifications</h5>
+                  <p class="card-text">
+                    We save you of the embarrassment of asking 
+                    the books back from your pals by sending 
+                    them regular notifications</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="height:70px;"><center>
+        <a class="btn btn-primary btn-lg m-2" href="/books" style="font-family: 'Lucida Sans';">
+          Explore Books &rAarr;
+        </a>
+      </center>
+    </div>
+    </main>
+    <div class="album py-4 bg-light">
+      <div class="container">
+        <section class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-5">
+              <div class="col bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="300ms" style="visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;">
+                <span class="timer counter alt-font appear" data-to="980" data-speed="7000"style="font-weight:bold;color:turquoise">{{book}}</span>
+                <span class="counter-title"style="font-family:'Courier New', Courier, monospace;font-size:xx-large;margin:auto;font-weight:bold;color:rgb(117, 39, 117);">Books</span>
+              </div> 
+              <div class="col bottom-margin text-center counter-section wow fadeInUp sm-margin-bottom-ten animated" data-wow-duration="600ms" style="visibility: visible; animation-duration: 600ms; animation-name: fadeInUp;">
+                <span class="timer counter alt-font appear" data-to="980" data-speed="7000"style="font-weight:bold;color:turquoise">{{title}}</span> 
+                <span class="counter-title"style="font-family:'Courier New', Courier, monospace;font-size:xx-large;margin:auto;font-weight:bold;color:rgb(117, 39, 117);">Titles</span>
+              </div>
+              <div class="col bottom-margin-small text-center counter-section wow fadeInUp xs-margin-bottom-ten animated" data-wow-duration="900ms" style="visibility: visible; animation-duration: 900ms; animation-name: fadeInUp;">
+                <span class="timer counter alt-font appear" data-to="810" data-speed="7000"style="font-weight:bold;color:turquoise">{{auth}}</span>
+                <span class="counter-title"style="font-family:'Courier New', Courier, monospace;font-size:xx-large;margin:auto;font-weight:bold;color:rgb(117, 39, 117);">Authors</span>
+                </div> 
+                  <div class="col text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
+                    <span class="timer counter alt-font appear" data-to="600" data-speed="7000"style="font-weight:bold;color:turquoise">{{lang}}</span> 
+                    <span class="counter-title"style="font-family:'Courier New', Courier, monospace;font-size:xx-large;margin:auto;font-weight:bold;color:rgb(117, 39, 117);">Language</span>
+                  </div>
+                  <div class="col text-center counter-section wow fadeInUp animated" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-name: fadeInUp;">
+                    <span class="timer counter alt-font appear" data-to="600" data-speed="7000"style="font-weight:bold;color:turquoise">{{gen}}</span> 
+                    <span class="counter-title"style="font-family:'Courier New', Courier, monospace;font-size:xx-large;margin:auto;font-weight:bold;color:rgb(117, 39, 117);">Genres</span>
+                  </div>
+              </div>
+      </section>
+      </div>
+    </div>
+    <h2 class="display-6 text-center mb-4"style="font-family: 'Times New Roman', Times, serif;font-size:40px;">Contact</h2>
+    <div class="album py-3 bg-light">
+      <div class="container">
+        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-6 g-5">
+          <div class="col">
+            <img src="{% static 'insta.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+          <div class="col">
+            <img src="{% static 'facebook.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+          <div class="col">
+            <img src="{% static 'whatsapp.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+          <div class="col">
+            <img src="{% static 'linkedin.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+          <div class="col">
+            <img src="{% static 'twitter.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+          <div class="col">
+            <img src="{% static 'telegram.png'%}" style="width: 100px; height:100px; margin:auto">
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="pt-4 pt-md-5 border-top bg-dark text-white px-md-5">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+          <div class="col" style="width: 50%;">
+                  <img  src="{% static 'readingFinal.png' %}" alt="" style="max-width:100%; margin:auto;">
+          </div> 
+          <div class="col" style="width: 50%; margin:auto">
+              <h5>This Link Help You Why Choose Us</h5>
+              <ul class="list-unstyled text-small">
+                <li ><a class="link-secondary text-decoration-none" href="#">Home</a></li>
+                <li ><a class="link-secondary text-decoration-none" href="#">About Us</a></li>
+                <li ><a class="link-secondary text-decoration-none" href="#">Terms & Condition</a></li>
+                <li ><a class="link-secondary text-decoration-none" href="#">Privacy Policy</a></li>
+              </ul>
+          </div> 
+      </div>
+    </footer>
+    <div style="height:30px;"><center>&copy;Copyright <b>Krishnakumar Pal</b>,All Right Reserved</center></div>
+    {% endblock %}
+</body>
+</html>
