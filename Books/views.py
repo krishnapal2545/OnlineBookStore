@@ -27,13 +27,42 @@ def home(request):
 
 def login(request):
     if request.method == 'POST':
+        id = request.POST['id']
         logid=request.POST['logid']
         passw=request.POST['pass']
-        if Admin.objects.filter(logid=logid,password=passw).exists():
+        if Admin.objects.filter(adminid=id,logid=logid,password=passw).exists():
             admin = Admin.objects.filter(logid=logid,password=passw).first()
             request.session['admin']=admin.adminid
             return redirect('/')
     return render(request,'login.html')
+
+def register(request):
+    if request.method == 'POST':
+        cpassw = request.POST['cpass']
+        passw=request.POST['pass']
+        if cpassw != passw:
+            Result="Your password doesn't match!!"
+            messages.success(request,Result)
+            return render(request,'register.html')
+        logid=request.POST['logid']
+        name = request.POST['name']
+        if Admin.objects.filter(name = name , logid =logid,password=passw).exists():
+            admin = Admin.objects.get(name = name , logid =logid,password=passw)
+            Result=f"Your ID is {admin.adminid}"
+            messages.success(request,Result)
+            return redirect('/login')
+        while True :
+            id=''.join(random.choices(string.ascii_uppercase + string.digits,k=9))
+            if Admin.objects.filter(adminid=id).exists() :
+                continue
+            else :
+                break
+        create = Admin.objects.create(adminid=id,name=name,logid=logid,password=passw)
+        create.save();
+        Result=f"Your ID is {id}"
+        messages.success(request,Result)
+        return redirect('/login')
+    return render(request,'register.html')
 
 def logout(request):
     if 'admin' in request.session:
@@ -73,8 +102,7 @@ def booklist(request):
     genre = {'All'}
     lang = {'All'}
     bookid = {'All'}
-    boo,aut,lan,gen='All','All','All','All' 
-    bookids=[]
+    aut,lan,gen='All','All','All'
     bookgens=[]
     booklans=[]
     bookauts =[]
@@ -103,24 +131,41 @@ def booklist(request):
         bookid.add(book.bookid)
     param={'login':login,'Books':books,'Authors':author,
     'Genres':genre,'Languages':lang,'Bookids':bookid,
-    'boo':boo,'gen':gen,'lan':lan,'aut':aut,
+    'gen':gen,'lan':lan,'aut':aut,
     'prev':prev,'old':old,'num':page,'last':last,'page':True
     }
     if request.method == 'POST':
-        boo = request.POST['bookid']
         gen = request.POST['genre']
         lan = request.POST['lang']
         aut = request.POST['auth']
-        if boo != 'All': bookids = list(Book.objects.filter(bookid=boo).all())
+        aLL=[gen,lan,aut]
+        match = request.POST.get('match',False)
         if gen != 'All': bookgens = list(Book.objects.filter(genre=gen).all())
         if lan != 'All': booklans = list(Book.objects.filter(language=lan).all())
         if aut != 'All': bookauts = list(Book.objects.filter(author=aut).all())
-        books = bookids + bookauts + bookgens + booklans
-        if boo == 'All' and gen == 'All' and lan == 'All' and aut == 'All' :
+        books =  bookauts + bookgens + booklans
+        if gen == 'All' and lan == 'All' and aut == 'All' :
             return redirect('/books')
-
+        a=0
+        for i in aLL:
+            print(i)
+            if i == 'All':
+                print(i)
+                a = a + 1
+                print(a) 
+            if a>1:
+                match = False   
+        if match:
+            setOfbooks = set()
+            dubooks = set()
+            for book in books:
+                if book in setOfbooks:
+                   dubooks.add(book)
+                else:
+                   setOfbooks.add(book) 
+            books=list(dubooks)
         param={'login':login,'Books':books,'Authors':author,
         'Genres':genre,'Languages':lang,'Bookids':bookid,
-        'boo':boo,'gen':gen,'lan':lan,'aut':aut,
+        'gen':gen,'lan':lan,'aut':aut,
         }
     return render(request,'booklist.html',param)

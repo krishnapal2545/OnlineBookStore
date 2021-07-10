@@ -25,6 +25,12 @@ SECRET_KEY = 'oc(36*57t2)nmxcip88ntn9up@8*$zwx=@m91gk$6vf=h$^z4d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SECURE_HSTS_SECONDS = 60
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_PRELOAD = True
 
 ALLOWED_HOSTS = ['127.0.0.1','publicbook.herokuapp.com']
 
